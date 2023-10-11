@@ -18,6 +18,9 @@ import ChecklistIcon from '@mui/icons-material/Checklist';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SupportIcon from '@mui/icons-material/Support';
 import LogoutIcon from '@mui/icons-material/Logout';
+import CreateIcon from '@mui/icons-material/Create';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import MessageIcon from '@mui/icons-material/Message';
 import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
 
 export const metadata = {
@@ -28,9 +31,9 @@ export const metadata = {
 const DRAWER_WIDTH = 240;
 
 const LINKS = [
-  { text: 'Home', href: '/', icon: HomeIcon },
-  { text: 'Starred', href: '/starred', icon: StarIcon },
-  { text: 'Tasks', href: '/tasks', icon: ChecklistIcon },
+  { text: '홈', href: '/', icon: HomeIcon },
+  { text: '모의면접', href: '/starred', icon: MessageIcon },
+  { text: '자기소개서 첨삭', href: '/tasks', icon: CreateIcon },
 ];
 
 const PLACEHOLDER_LINKS = [
@@ -45,10 +48,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <ThemeRegistry>
           <AppBar position="fixed" sx={{ zIndex: 2000 }}>
-            <Toolbar sx={{ backgroundColor: 'background.paper' }}>
-              <DashboardIcon sx={{ color: '#444', mr: 2, transform: 'translateY(-2px)' }} />
-              <Typography variant="h6" noWrap component="div" color="black">
-                Next.js App Router
+            <Toolbar sx={{ backgroundColor: 'background.primary' }}>
+              <AccountBoxIcon sx={{ color: '#fff', mr: 2 }} />
+              <Typography variant="h6" noWrap component="div" color="white">
+                YonGPT
               </Typography>
             </Toolbar>
           </AppBar>
