@@ -24,16 +24,16 @@ import MessageIcon from '@mui/icons-material/Message';
 import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
 
 export const metadata = {
-  title: 'Next.js App Router + Material UI v5',
-  description: 'Next.js App Router + Material UI v5',
+  title: 'YonGPT',
+  description: '',
 };
 
 const DRAWER_WIDTH = 240;
 
 const LINKS = [
   { text: '홈', href: '/', icon: HomeIcon },
-  { text: '모의면접', href: '/starred', icon: MessageIcon },
-  { text: '자기소개서 첨삭', href: '/tasks', icon: CreateIcon },
+  { text: '모의면접', href: '/MockInterview', icon: MessageIcon },
+  { text: '자기소개서 첨삭', href: '/ResumeEditing', icon: CreateIcon },
 ];
 
 const PLACEHOLDER_LINKS = [
