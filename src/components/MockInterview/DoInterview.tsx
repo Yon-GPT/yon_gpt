@@ -70,13 +70,13 @@ export default function DoInterview({ info }: {info: MockInterviewInfoI}) {
     const q = `아래의 ${info.type} 내용을 기반으로 면접을 진행해 주세요:
 
     ${info.content}`
-    // getAnswerAPI(q).then((answer) => {
-    //   setChat((before) => {
-    //     const deleted = before.filter(t => !('loading' in t))
-    //     const newContent = { content: answer }
-    //     return [...deleted, newContent]
-    //   });
-    // })
+    getAnswerAPI(q).then((answer) => {
+      setChat((before) => {
+        const deleted = before.filter(t => !('loading' in t))
+        const newContent = { content: answer }
+        return [...deleted, newContent]
+      });
+    })
   }, []);
   return (
     <Box height="100%" width={"100%"} sx={{
@@ -90,10 +90,7 @@ export default function DoInterview({ info }: {info: MockInterviewInfoI}) {
         gap: '10px',
       }}>
         {
-          dummyData.map((c, i) => {
-            if ('loading' in c) {
-              return <Box>로딩중</Box>
-            }
+          chat.map((c, i) => {
             return (
               <div style={{
                 width: '80%',
@@ -102,7 +99,7 @@ export default function DoInterview({ info }: {info: MockInterviewInfoI}) {
                 marginLeft: i%2 == 0 ? '20%' : '0%',
                 marginRight: i%2 == 0 ? '0%' : '20%',
                 borderRadius: '4px'
-              }}>{c.content}</div>
+              }}>{'loading' in c ? '로딩중...' : c.content}</div>
             )
           })
         }
@@ -117,11 +114,12 @@ export default function DoInterview({ info }: {info: MockInterviewInfoI}) {
       console.log(e)
       const data = new FormData(e.target as any);
       const answer = data.get('answer') as (string)
+      (e.target as any).reset()
       if (answer?.length === 0) {
         alert('내용을 입력해주세요.')
         return;
       }
-      // doAnswer(answer)
+      doAnswer(answer);
     }}
     >
 

@@ -26,6 +26,10 @@ const nextConfig = {
 		];
 	},
   trailingSlash: true,
+  experimental: {
+    proxyTimeout: 300000
+  },
+  reactStrictMode: false,
 };
 
 module.exports = nextConfig;
