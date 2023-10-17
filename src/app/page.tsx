@@ -44,7 +44,7 @@ export default function HomePage() {
           </Grid>
         </Grid> */}
       </div>
-      <Drawer
+      {/* <Drawer
         sx={{
           width: 320,
           flexShrink: 0,
@@ -58,15 +58,15 @@ export default function HomePage() {
         }}
         variant="permanent"
         anchor="right"
-      >
-        <List sx={{ px: 2 }}>
+      > */}
+        {/* <List sx={{ px: 2 }}>
           <ListItem disablePadding>
             <Typography variant="overline" sx={{ fontWeight: 500 }}>
               On this page
             </Typography>
           </ListItem>
-        </List>
-      </Drawer>
+        </List> */}
+      {/* </Drawer> */}
     </Box>
   );
 }
