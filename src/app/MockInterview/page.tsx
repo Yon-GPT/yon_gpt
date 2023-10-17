@@ -2,22 +2,10 @@ import * as React from 'react';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import MockInterviewComponent from '@/components/MockInterview/MockInterview';
 
 export default function MockInterview() {
   return (
-    <Container>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Typography variant="body1" gutterBottom>
-          Mock Interview Page
-        </Typography>
-      </Box>
-    </Container>
+    <MockInterviewComponent />
   );
 }

@@ -105,6 +105,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               ml: `${DRAWER_WIDTH}px`,
               mt: ['48px', '56px', '64px'],
               p: 3,
+              height: 'calc(100vh - 72px)'
             }}
           >
             {children}
