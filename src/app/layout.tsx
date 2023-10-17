@@ -114,7 +114,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               ml: `0`,
               mt: ['64px'],
               p: 3,
-              height: 'calc(100vh - 72px)'
+              height: 'calc(100vh - 112px)'
             }}
           >
             {children}
