@@ -13,7 +13,7 @@ export default function HomePage() {
   return (
     <Box sx={{ display: 'flex' }}>
       <div>
-        <Alert severity="info" sx={{ mt: 2, mb: 5 }}>
+        {/* <Alert severity="info" sx={{ mt: 2, mb: 5 }}>
           <AlertTitle>Hello 👋</AlertTitle>
           This app uses the Next.js App Router and Material UI v5.
         </Alert>
@@ -42,9 +42,9 @@ export default function HomePage() {
               text="The CIELAB color space, also referred to as L*a*b*, was intended as a perceptually uniform space, where a given numerical change corresponds to a similar perceived change in color."
             />
           </Grid>
-        </Grid>
+        </Grid> */}
       </div>
-      <Drawer
+      {/* <Drawer
         sx={{
           width: 320,
           flexShrink: 0,
@@ -58,15 +58,15 @@ export default function HomePage() {
         }}
         variant="permanent"
         anchor="right"
-      >
-        <List sx={{ px: 2 }}>
+      > */}
+        {/* <List sx={{ px: 2 }}>
           <ListItem disablePadding>
             <Typography variant="overline" sx={{ fontWeight: 500 }}>
               On this page
             </Typography>
           </ListItem>
-        </List>
-      </Drawer>
+        </List> */}
+      {/* </Drawer> */}
     </Box>
   );
 }

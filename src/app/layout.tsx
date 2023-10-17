@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from 'react';
 import Link from 'next/link';
 import AppBar from '@mui/material/AppBar';
@@ -22,13 +24,20 @@ import CreateIcon from '@mui/icons-material/Create';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import MessageIcon from '@mui/icons-material/Message';
 import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import UploadIcon from '@mui/icons-material/Upload';
+import { useRouter } from 'next/navigation';
 
-export const metadata = {
+
+
+const metadata = {
   title: 'YonGPT',
   description: '',
 };
 
 const DRAWER_WIDTH = 240;
+
 
 const LINKS = [
   { text: '홈', href: '/', icon: HomeIcon },
@@ -42,7 +51,17 @@ const PLACEHOLDER_LINKS = [
   { text: 'Logout', icon: LogoutIcon },
 ];
 
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+
+  const [value, setValue] = React.useState(0)
+  
+  const router = useRouter();
+
+  const onLink = (href: string) => {
+    router.push(href);
+  };
+
   return (
     <html lang="en">
       <body>
@@ -55,23 +74,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </Typography>
             </Toolbar>
           </AppBar>
-          <Drawer
+          {/* <Drawer
             sx={{
-              width: DRAWER_WIDTH,
+              width: 'auto',
               flexShrink: 0,
               '& .MuiDrawer-paper': {
-                width: DRAWER_WIDTH,
+                width: 'auto',
                 boxSizing: 'border-box',
-                top: ['48px', '56px', '64px'],
+                top: ['auto', 'auto', 'auto'],
                 height: 'auto',
-                bottom: 0,
+                bottom: '0',
               },
             }}
             variant="permanent"
-            anchor="left"
+            anchor="bottom"
           >
             <Divider />
-            <List>
+            
+            <List style={flexContainer}>
               {LINKS.map(({ text, href, icon: Icon }) => (
                 <ListItem key={href} disablePadding>
                   <ListItemButton component={Link} href={href}>
@@ -84,26 +104,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               ))}
             </List>
             <Divider sx={{ mt: 'auto' }} />
-            <List>
-              {PLACEHOLDER_LINKS.map(({ text, icon: Icon }) => (
-                <ListItem key={text} disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <Icon />
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          </Drawer>
+
+          </Drawer> */}
           <Box
             component="main"
             sx={{
-              flexGrow: 1,
+              flexGrow: 'auto',
               bgcolor: 'background.default',
-              ml: `${DRAWER_WIDTH}px`,
-              mt: ['48px', '56px', '64px'],
+              ml: `0`,
+              mt: ['64px'],
               p: 3,
               height: 'calc(100vh - 72px)'
             }}
@@ -111,6 +120,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </Box>
         </ThemeRegistry>
+        
+        <Drawer
+            sx={{
+              width: 'auto',
+              flexShrink: 0,
+              '& .MuiDrawer-paper': {
+                width: 'auto',
+                boxSizing: 'border-box',
+                top: ['auto', 'auto', 'auto'],
+                height: 'auto',
+                bottom: '0',
+              },
+            }}
+            variant="permanent"
+            anchor="bottom"
+          >
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        >
+          <BottomNavigationAction label="Home" icon={<HomeIcon />} onClick={() => onLink("/")} />
+          <BottomNavigationAction label="Interview" icon={<MessageIcon />} onClick={() => onLink("/MockInterview")}/>
+          <BottomNavigationAction label="Upload" icon={<UploadIcon />} onClick={() => onLink("/ResumeEditing")}/>
+        </BottomNavigation>
+        </Drawer>
       </body>
     </html>
   );
