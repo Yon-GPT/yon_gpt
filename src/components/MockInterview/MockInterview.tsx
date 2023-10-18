@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import GetInterviewInfo from './GetInterviewInfo';
 import DoInterview from './DoInterview';
+import DummyInterview from './DummyInterview';
 
 export interface MockInterviewInfoI {
   type: string,
@@ -17,6 +18,7 @@ export default function MockInterviewComponent() {
   return (
     <Box height="100%">
       {
+        // info === null ? <GetInterviewInfo setInfo={setInfo} /> : <DoInterview info={info} />
         info === null ? <GetInterviewInfo setInfo={setInfo} /> : <DoInterview info={info} />
       } 
     </Box>

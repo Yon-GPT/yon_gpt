@@ -58,7 +58,7 @@ export default function GetInterviewInfo({setInfo}: { setInfo: (info: MockInterv
           rows={8}
           sx={{
             height: '100%',
-            width: '100%'
+            width: '80%'
           }}
           name="content"
         />
