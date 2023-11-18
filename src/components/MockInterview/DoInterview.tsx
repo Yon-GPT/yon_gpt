@@ -144,7 +144,7 @@ export default function DoInterview({ info }: {info: MockInterviewInfoI}) {
         }}>
           <ExitToApp />
         </Button>
-    </Box>
+      </Box>
     </Box>
   );
 }
