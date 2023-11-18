@@ -7,7 +7,8 @@ import GetInterviewInfo from './GetInterviewInfo';
 import { MockInterviewInfoI } from './MockInterview';
 import axios from 'axios';
 import { Button, Input, TextField } from '@mui/material';
-import { ArrowForward } from '@mui/icons-material';
+import { ArrowForward, ExitToApp } from '@mui/icons-material';
+import { useRouter } from 'next/navigation';
 
 export interface interviewChatI {
   content: string
@@ -55,6 +56,7 @@ const dummyData: interviewChatType[] = [
 
 export default function DoInterview({ info }: {info: MockInterviewInfoI}) {
   const [chat, setChat] = React.useState<interviewChatType[]>([{content: `${info.type} 내용을 기반으로 면접을 진행해 주세요.`}, {loading: true}]);
+  const router = useRouter();
   const isLoading = chat.length > 0 && 'loading' in chat[chat.length-1];
   console.log(chat)
   const doAnswer = async (answer: string) => {
@@ -135,6 +137,12 @@ export default function DoInterview({ info }: {info: MockInterviewInfoI}) {
         />
         <Button type='submit' color='primary' variant='contained'>
           <ArrowForward />
+        </Button>
+        <Button type='button' color='error' variant='contained' onClick={() => {
+          if (!confirm('모의 면접을 종료하고 피드백 화면으로 이동하시겠습니까?')) return;
+          router.push('/feedback');
+        }}>
+          <ExitToApp />
         </Button>
     </Box>
     </Box>
