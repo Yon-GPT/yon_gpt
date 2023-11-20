@@ -18,13 +18,20 @@ export interface interviewChatWatingI {
   loading: true
 }
 
+export interface interviewAPII {
+  status: string
+  response: string
+  previous_QnA: any
+}
+
 export type interviewChatType = interviewChatI | interviewChatWatingI
 
-const getAnswerAPI = async (question: string) => {
+const getAnswerAPI = async (question: string, type: string) => {
   console.log(question)
-  const { data } = await axios.post<{ response: string }>('/api/chat/', {question})
-  const { response } = data
-  return response
+  const { data } = await axios.post<interviewAPII>(`/api/chat${type === '채용공고' ? 'Jd' : 'Resume'}/`, {question})
+  // const { response } = data
+  console.log(data)
+  return data
 }
 
 const dummyData: interviewChatType[] = [
@@ -56,28 +63,28 @@ const dummyData: interviewChatType[] = [
 
 export default function DoInterview({ info }: {info: MockInterviewInfoI}) {
   const [chat, setChat] = React.useState<interviewChatType[]>([{content: `${info.type} 내용을 기반으로 면접을 진행해 주세요.`}, {loading: true}]);
+  const [prev, setPrev] = React.useState<any>([])
   const router = useRouter();
   const isLoading = chat.length > 0 && 'loading' in chat[chat.length-1];
   console.log(chat)
   const doAnswer = async (answer: string) => {
     setChat(t => ([...t, { content: answer}, {loading: true}]))
-    const response = await getAnswerAPI(answer)
+    const data = await getAnswerAPI(answer, info.type)
     setChat((before) => {
       const deleted = before.filter(t => !('loading' in t))
-      const newContent = { content: response }
+      const newContent = { content: data.response }
       return [...deleted, newContent]
     });
+    setPrev(data.previous_QnA)
   }
   React.useEffect(() => {
-    const q = `아래의 ${info.type} 내용을 기반으로 면접을 진행해 주세요:
-
-    ${info.content}`
-    getAnswerAPI(q).then((answer) => {
+    getAnswerAPI(info.content, info.type).then((answer) => {
       setChat((before) => {
         const deleted = before.filter(t => !('loading' in t))
-        const newContent = { content: answer }
+        const newContent = { content: answer.response }
         return [...deleted, newContent]
       });
+      setPrev(answer.previous_QnA)
     })
   }, []);
   return (
@@ -90,6 +97,7 @@ export default function DoInterview({ info }: {info: MockInterviewInfoI}) {
         display: 'flex',
         flexDirection: 'column',
         gap: '10px',
+        overflowY: 'auto'
       }}>
         {
           chat.map((c, i) => {
@@ -100,6 +108,7 @@ export default function DoInterview({ info }: {info: MockInterviewInfoI}) {
                 background: i%2 == 0 ? 'skyblue': 'lightgray',
                 marginLeft: i%2 == 0 ? '20%' : '0%',
                 marginRight: i%2 == 0 ? '0%' : '20%',
+                whiteSpace: 'pre-wrap',
                 borderRadius: '4px'
               }}>{'loading' in c ? '로딩중...' : c.content}</div>
             )
@@ -140,7 +149,7 @@ export default function DoInterview({ info }: {info: MockInterviewInfoI}) {
         </Button>
         <Button type='button' color='error' variant='contained' onClick={() => {
           if (!confirm('모의 면접을 종료하고 피드백 화면으로 이동하시겠습니까?')) return;
-          router.push('/feedback');
+          router.push(`/feedback`);
         }}>
           <ExitToApp />
         </Button>
